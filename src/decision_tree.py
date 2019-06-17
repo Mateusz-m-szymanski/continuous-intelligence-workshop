@@ -51,8 +51,9 @@ def encode(train, validate):
 
     encoded = encode_categorical_columns(joined.fillna(-1))
 
-    print("Not predicting returns...")
+    print("Not predicting shop returns...")
     encoded.loc[encoded.unit_sales < 0, 'unit_sales'] = 0
+    
 
     validate = encoded[encoded['id'].isin(validate_ids)]
     train = encoded[encoded['id'].isin(train_ids)]
@@ -137,4 +138,4 @@ def main(model=Model.DECISION_TREE, seed=None):
 
 
 if __name__ == "__main__":
-    main(model=Model.DECISION_TREE, seed=8675309)
+    main(model=Model.RANDOM_FOREST, seed=8675309)
